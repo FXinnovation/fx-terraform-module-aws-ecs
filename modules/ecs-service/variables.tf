@@ -116,12 +116,6 @@ variable "secret_map" {
   type        = list(map(string))
 }
 
-variable "apache_auth_secret_map" {
-  description = "List of maps containing aws secrets to inject as environment variables in the container."
-  type        = list(map(string))
-  default     = []
-}
-
 variable "command" {
   description = "Command to launch on container startup."
   type        = string

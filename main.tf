@@ -41,7 +41,6 @@ module "service" {
   subnet_ids               = var.subnet_ids
   vpc_id                   = var.vpc_id
 
-  apache_auth_secret_map             = lookup(each.value, "ecs_apache_auth_secret_map", [])
   command                            = lookup(each.value, "ecs_command", null)
   container_cpu_limit                = lookup(each.value, "ecs_container_cpu_limit", null)
   container_healthcheck_path         = lookup(each.value, "ecs_container_healthcheck_path", "/")
