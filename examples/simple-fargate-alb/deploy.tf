@@ -2,10 +2,32 @@ resource "random_pet" "this" {
   length = 2
 }
 
+resource "aws_ecs_cluster" "this" {
+  name = "ecs-test-${random_pet.this.id}"
+
+  tags = merge(
+    local.tags,
+    var.tags,
+  )
+}
+
+resource "aws_security_group" "this" {
+  name        = "${aws_ecs_cluster.this.name}-sg"
+  description = "${aws_ecs_cluster.this.name} security group"
+  vpc_id      = var.vpc_id
+
+  tags = merge(
+    local.tags,
+    var.tags,
+  )
+}
+
 module "ecs" {
   source = "../../"
 
-  ecs_cluster_name = "ecs-test-${random_pet.this.id}"
+  cluster_id       = aws_ecs_cluster.this.id
+  cluster_sg       = aws_security_group.this.id
+  ecs_cluster_name = aws_ecs_cluster.this.name
   vpc_id           = data.aws_vpc.default.id
   subnet_ids       = tolist(data.aws_subnet_ids.default.ids)
   service = {

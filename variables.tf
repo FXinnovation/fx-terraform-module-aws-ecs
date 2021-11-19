@@ -41,3 +41,13 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "cluster_id" {
+  description = "ID of the ECS cluster."
+  type        = string
+}
+
+variable "cluster_sg" {
+  description = "Security group of the ECS cluster."
+  type        = string
+}

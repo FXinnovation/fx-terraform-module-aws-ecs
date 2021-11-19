@@ -11,9 +11,7 @@ Template repository for public terraform modules
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+No providers.
 
 ## Modules
 
@@ -23,15 +21,14 @@ Template repository for public terraform modules
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [aws_ecs_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster) | resource |
-| [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+No resources.
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | ID of the ECS cluster. | `string` | n/a | yes |
+| <a name="input_cluster_sg"></a> [cluster\_sg](#input\_cluster\_sg) | Security group of the ECS cluster. | `string` | n/a | yes |
 | <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name) | ECS cluster name. | `string` | n/a | yes |
 | <a name="input_ecs_launch_type"></a> [ecs\_launch\_type](#input\_ecs\_launch\_type) | Type of support for launching the containers. Must be one of EC2 or FARGATE. | `string` | `"FARGATE"` | no |
 | <a name="input_ecs_scheduling_strategy"></a> [ecs\_scheduling\_strategy](#input\_ecs\_scheduling\_strategy) | Scheduling strategy for the task. | `string` | `"REPLICA"` | no |

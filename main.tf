@@ -4,26 +4,6 @@ locals {
   }
 }
 
-resource "aws_ecs_cluster" "this" {
-  name = var.ecs_cluster_name
-
-  tags = merge(
-    local.tags,
-    var.tags,
-  )
-}
-
-resource "aws_security_group" "this" {
-  name        = "${var.ecs_cluster_name}-sg"
-  description = "${var.ecs_cluster_name} security group"
-  vpc_id      = var.vpc_id
-
-  tags = merge(
-    local.tags,
-    var.tags,
-  )
-}
-
 #####
 # Services
 #####
@@ -33,8 +13,8 @@ module "service" {
 
   for_each = var.service
 
-  cluster_id               = aws_ecs_cluster.this.id
-  cluster_sg               = aws_security_group.this.id
+  cluster_id               = var.cluster_id
+  cluster_sg               = var.cluster_sg
   launch_type              = var.ecs_launch_type
   scheduling_strategy      = var.ecs_scheduling_strategy
   service_platform_version = var.ecs_service_platform_version
