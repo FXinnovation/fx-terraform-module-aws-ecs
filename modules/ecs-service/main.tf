@@ -95,7 +95,7 @@ resource "aws_ecs_service" "this" {
     content {
       target_group_arn = load_balancer.value
       container_name   = var.container_name
-      container_port   = var.container_inside_port
+      container_port   = var.container_outside_port
     }
   }
 
@@ -130,12 +130,15 @@ resource "aws_ecs_task_definition" "this" {
   family = var.task_definition_name
   container_definitions = jsonencode([
     {
-      name             = var.container_name
-      image            = var.container_image
-      cpu              = var.container_cpu_limit
-      memory           = var.container_mem_limit
-      essential        = true
-      portMappings     = var.port_mappings
+      name      = var.container_name
+      image     = var.container_image
+      cpu       = var.container_cpu_limit
+      memory    = var.container_mem_limit
+      essential = true
+      portMappings = list({
+        "containerPort" : var.container_inside_port
+        "hostPort" : var.container_outside_port
+      })
       command          = [var.command]
       environment      = var.environment_map
       secrets          = var.secret_map

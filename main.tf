@@ -36,7 +36,6 @@ module "service" {
   environment_map                    = lookup(each.value, "ecs_environment_map", [])
   lb_enabled                         = lookup(each.value, "ecs_lb_enabled", false)
   lb_target_group_arn                = lookup(each.value, "ecs_lb_target_group_arn", null)
-  port_mappings                      = lookup(each.value, "ecs_port_mappings", [])
   secret_map                         = lookup(each.value, "ecs_secret_map", [])
   service_name                       = lookup(each.value, "ecs_service_name", null)
   task_count                         = lookup(each.value, "ecs_task_count", null)

@@ -122,13 +122,6 @@ variable "command" {
   default     = "start.sh"
 }
 
-variable "port_mappings" {
-  description = "List of maps containing the port mappings for the container."
-  type = list(object({
-    containerPort = number
-  }))
-}
-
 variable "container_healthcheck_path" {
   description = "Endpoint to use for the healthcheck of the container"
   type        = string
