@@ -58,12 +58,6 @@ module "ecs" {
   }
 }
 
-resource "aws_security_group" "this" {
-  name        = "${random_pet.this.id}-lb-sg"
-  description = "${random_pet.this.id} lb security group"
-  vpc_id      = data.aws_vpc.default.id
-}
-
 resource "aws_security_group_rule" "this_app_ingress_sg" {
   type                     = "ingress"
   from_port                = 0
