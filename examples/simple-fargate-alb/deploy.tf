@@ -4,22 +4,18 @@ resource "random_pet" "this" {
 
 resource "aws_ecs_cluster" "this" {
   name = "ecs-test-${random_pet.this.id}"
-
-  tags = merge(
-    local.tags,
-    var.tags,
-  )
 }
 
 resource "aws_security_group" "this" {
-  name        = "${aws_ecs_cluster.this.name}-sg"
+  name        = "${aws_ecs_cluster.this.name}-ecs-sg"
   description = "${aws_ecs_cluster.this.name} security group"
-  vpc_id      = var.vpc_id
+  vpc_id      = data.aws_vpc.default.id
+}
 
-  tags = merge(
-    local.tags,
-    var.tags,
-  )
+resource "aws_security_group" "this_alb" {
+  name        = "${module.alb.lb_id}-alb-sg"
+  description = "${module.alb.lb_id} security group"
+  vpc_id      = data.aws_vpc.default.id
 }
 
 module "ecs" {
@@ -45,7 +41,7 @@ module "ecs" {
       "ecs_container_image" : "nginx:latest"
       "ecs_container_cpu_limit" : 256
       "ecs_container_mem_limit" : 512
-      "ecs_deployment_minimum_healthy_percent" : 50
+      "ecs_deployment_minimum_healthy_percent" : 100
       "ecs_deployment_maximum_percent" : 200
       "ecs_lb_enabled" : true
       "ecs_lb_target_group_arn" : module.alb.target_group_arns[0]
@@ -64,7 +60,7 @@ resource "aws_security_group_rule" "this_app_ingress_sg" {
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.this.id
-  security_group_id        = module.ecs.cluster_sg_id
+  security_group_id        = aws_security_group.this_alb.id
 }
 
 module "alb" {
