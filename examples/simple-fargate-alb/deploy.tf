@@ -35,7 +35,7 @@ module "ecs" {
       "ecs_launch_type" : "FARGATE"
       "ecs_lb_enabled" : false
       "ecs_task_network_mode" : "awsvpc"
-      "ecs_task_cpu_value" : 512
+      "ecs_task_cpu_value" : 125
       "ecs_service_name" : "nginx"
       "ecs_container_inside_port" : 80
       "ecs_container_outside_port" : 80
@@ -43,8 +43,8 @@ module "ecs" {
       "ecs_container_name" : "nginx"
       "ecs_task_definition_name" : "nginx"
       "ecs_container_image" : "nginx:latest"
-      "ecs_container_cpu_limit" : 256
-      "ecs_container_mem_limit" : 1024
+      "ecs_container_cpu_limit" : 125
+      "ecs_container_mem_limit" : 64
       "ecs_deployment_minimum_healthy_percent" : 50
       "ecs_deployment_maximum_percent" : 200
       "ecs_lb_enabled" : true
