@@ -64,7 +64,7 @@ resource "aws_security_group_rule" "this_app_ingress_sg" {
 }
 
 module "alb" {
-  source = "git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-aws-alb.git?ref=v6.5.0"
+  source = "git::https://github.com/FXinnovation/fx-terraform-aws-alb.git?ref=v6.5.0"
 
   name = "test-alb-${random_pet.this.id}"
 
