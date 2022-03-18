@@ -25,7 +25,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alb"></a> [alb](#module\_alb) | git::https://scm.dazzlingwrench.fxinnovation.com/fxinnovation-public/terraform-aws-alb.git | v6.5.0 |
+| <a name="module_alb"></a> [alb](#module\_alb) | git::https://github.com/FXinnovation/fx-terraform-aws-alb.git | v6.5.0 |
 | <a name="module_ecs"></a> [ecs](#module\_ecs) | ../../ | n/a |
 
 ## Resources
