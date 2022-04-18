@@ -135,10 +135,10 @@ resource "aws_ecs_task_definition" "this" {
       cpu       = var.container_cpu_limit
       memory    = var.container_mem_limit
       essential = true
-      portMappings = list({
+      portMappings = [{
         "containerPort" : var.container_inside_port
         "hostPort" : var.container_outside_port
-      })
+      }]
       command          = [var.command]
       environment      = var.environment_map
       secrets          = var.secret_map
